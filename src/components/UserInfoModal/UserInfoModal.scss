@@ -1,0 +1,17 @@
+.userInfoModal {
+  position: absolute;
+  padding: 10px;
+  top: 30%;
+  left: 35%;
+  background-color: rgb(220, 242, 26);
+  border-radius: 10px;
+  width: 25vw;
+  height: 20vh;
+  &__header {
+    img {
+      cursor: pointer;
+      position: absolute;
+      right: 15px;
+    }
+  }
+}

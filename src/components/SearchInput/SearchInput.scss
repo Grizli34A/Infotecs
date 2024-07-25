@@ -1,0 +1,25 @@
+.searchInputContainer {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .error {
+    color: red;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  input {
+    border: 2px solid;
+    padding: 5px;
+    width: 50vw;
+    max-width: 500px;
+  }
+  img {
+    cursor: pointer;
+    &.disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  }
+}

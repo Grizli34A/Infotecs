@@ -1,0 +1,45 @@
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  border: 3px solid grey;
+  max-width: 1200px;
+  width: 100vw;
+
+  th,
+  td {
+    border: 1px solid grey;
+  }
+
+  th {
+    min-width: 50px;
+    position: relative;
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 2px;
+    cursor: pointer;
+  }
+
+  tr {
+    &.searched {
+      background-color: greenyellow;
+    }
+  }
+
+  th .resizer {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    cursor: col-resize;
+    z-index: 1;
+    background-color: transparent;
+  }
+
+  th .resizer:hover,
+  th .resizer:active {
+    background-color: #ccc;
+  }
+}

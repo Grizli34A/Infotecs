@@ -1,0 +1,12 @@
+.searchBy {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  p {
+    cursor: pointer;
+    font-size: 1.2rem;
+    &.active {
+      color: blue;
+    }
+  }
+}
