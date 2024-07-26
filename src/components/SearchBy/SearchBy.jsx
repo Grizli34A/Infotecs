@@ -1,7 +1,7 @@
-/* eslint-disable react/prop-types */
 import validateInput from "../../utils/validateInput";
 import "./SearchBy.scss";
-
+//в ТЗ не совсем было ясно, что подразумевается под поиском информации для всех колонок, поэтому сделал отдельно компонента выбора типа поиска,
+// чтобы прокидывать key в запрос было удобно и пользователю интуитивно понятно,что он ищет
 const SearchBy = ({ sortType, setSortType, searchInputValue, setIsValid }) => {
   const handleTypeClick = (type) => {
     setSortType(type);
@@ -55,5 +55,4 @@ const SearchBy = ({ sortType, setSortType, searchInputValue, setIsValid }) => {
     </div>
   );
 };
-
 export default SearchBy;

@@ -5,8 +5,7 @@ import "./UserInfoModal.scss";
 
 const UserInfoModal = ({ userId, setUserId }) => {
   const [userInfo, setUserInfo] = useState({});
-  const [error, setError] = useState(null); // Добавляем состояние для обработки ошибок
-
+  const [error, setError] = useState(null);
   useEffect(() => {
     const getUserInfo = async () => {
       try {

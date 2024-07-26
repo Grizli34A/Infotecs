@@ -11,7 +11,7 @@ const validateInput = (sortType, value) => {
     case "address.city":
       return /^[A-Za-zА-Яа-яЁё\s]+$/.test(value); // Только буквы и пробелы
     case "address.address":
-      return value.length > 0; // Не пустое значение
+      return value.length > 0;
     default:
       return true;
   }

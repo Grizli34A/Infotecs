@@ -1,9 +1,8 @@
-import { useState } from "react";
-import getAllUsers from "../../services/getAllUsers";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Table from "../../components/Table/Table";
 import SearchInput from "../../components/SearchInput/SearchInput";
 import UserInfoModal from "../../components/UserInfoModal/UserInfoModal";
+import getAllUsers from "../../services/getAllUsers";
 const MainPage = () => {
   const [users, setUsers] = useState([]);
   const [searchedUsers, setSearchedUsers] = useState([]);

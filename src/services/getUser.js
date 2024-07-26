@@ -10,8 +10,8 @@ const getUser = async (userId) => {
     return data;
   } catch (error) {
     console.error(`Error fetching user ${userId}:`, error);
-    return null; // Возвращаем null в случае ошибки
+    return null;
   }
 };
-
+//получаем конкретного пользователя для вывода данных в модальном окне
 export default getUser;

@@ -1,10 +1,7 @@
 import { useRef, useEffect, useState } from "react";
+import getNestedValue from "../../utils/getNestedValue";
+import initResize from "../../utils/initResize";
 import "./Table.scss";
-
-// Функция для доступа к вложенным свойствам объекта
-const getNestedValue = (obj, key) => {
-  return key.split(".").reduce((acc, part) => acc && acc[part], obj);
-};
 
 const Table = ({ data, searchedUsers, setUserId }) => {
   const [sortedData, setSortedData] = useState(data);
@@ -12,29 +9,10 @@ const Table = ({ data, searchedUsers, setUserId }) => {
     key: null,
     direction: "none",
   });
-
   const tableRef = useRef();
 
   useEffect(() => {
-    // Инициализация резизеров колонок
-    const initResize = (event) => {
-      const col = event.target.parentElement;
-      const startX = event.pageX;
-      const startWidth = col.offsetWidth;
-
-      const doResize = (e) => {
-        col.style.width = `${Math.max(startWidth + e.pageX - startX, 50)}px`;
-      };
-
-      const stopResize = () => {
-        document.removeEventListener("mousemove", doResize);
-        document.removeEventListener("mouseup", stopResize);
-      };
-
-      document.addEventListener("mousemove", doResize);
-      document.addEventListener("mouseup", stopResize);
-    };
-
+    // Инициализация ресайзеров для колонок
     const columns = tableRef.current.querySelectorAll("th");
     columns.forEach((col) => {
       const resizer = document.createElement("div");
@@ -45,22 +23,19 @@ const Table = ({ data, searchedUsers, setUserId }) => {
   }, []);
 
   useEffect(() => {
-    // Сортировка данных
     const { key, direction } = sortState;
     if (!key || direction === "none") {
       setSortedData(data);
       return;
     }
-
     const sorted = [...data].sort((a, b) => {
       const aValue = getNestedValue(a, key);
       const bValue = getNestedValue(b, key);
-
       if (aValue < bValue) return direction === "asc" ? -1 : 1;
       if (aValue > bValue) return direction === "asc" ? 1 : -1;
       return 0;
     });
-
+    //сортируем всю таблицу и кидаем новую в стейт
     setSortedData(sorted);
   }, [data, sortState]);
 
@@ -78,50 +53,30 @@ const Table = ({ data, searchedUsers, setUserId }) => {
     });
   };
 
-  const showUserInfoModal = (id) => {
-    setUserId(id);
+  const getSortIndicator = (key) => {
+    if (sortState.key === key) {
+      // для отображения вида сортировки
+      if (sortState.direction === "asc") return "↑";
+      if (sortState.direction === "desc") return "↓";
+    }
+    return "";
   };
-
   return (
     <table ref={tableRef}>
       <thead>
         <tr>
           <th onClick={() => handleSort("firstName")}>
-            ФИО{" "}
-            {sortState.key === "firstName" &&
-              (sortState.direction === "asc"
-                ? "🔼"
-                : sortState.direction === "desc"
-                ? "🔽"
-                : "")}
+            ФИО {getSortIndicator("firstName")}
           </th>
           <th onClick={() => handleSort("age")}>
-            Возраст{" "}
-            {sortState.key === "age" &&
-              (sortState.direction === "asc"
-                ? "🔼"
-                : sortState.direction === "desc"
-                ? "🔽"
-                : "")}
+            Возраст {getSortIndicator("age")}
           </th>
           <th onClick={() => handleSort("gender")}>
-            Пол{" "}
-            {sortState.key === "gender" &&
-              (sortState.direction === "asc"
-                ? "🔼"
-                : sortState.direction === "desc"
-                ? "🔽"
-                : "")}
+            Пол {getSortIndicator("gender")}
           </th>
           <th>Номер телефона</th>
           <th onClick={() => handleSort("address.city")}>
-            Адрес{" "}
-            {sortState.key === "address.city" &&
-              (sortState.direction === "asc"
-                ? "🔼"
-                : sortState.direction === "desc"
-                ? "🔽"
-                : "")}
+            Адрес {getSortIndicator("address.city")}
           </th>
         </tr>
       </thead>
@@ -130,7 +85,7 @@ const Table = ({ data, searchedUsers, setUserId }) => {
           <tr
             key={index}
             className={searchedUsers.includes(user.id) ? "searched" : ""}
-            onClick={() => showUserInfoModal(user.id)}
+            onClick={() => setUserId(user.id)}
           >
             <td>{`${user.firstName} ${user.lastName} ${
               user.maidenName ? `(${user.maidenName})` : ""

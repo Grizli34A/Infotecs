@@ -10,8 +10,8 @@ const searchInformation = async ({ key, value }) => {
     return data.users ? data.users.map((user) => user.id) : [];
   } catch (error) {
     console.error("Error searching information:", error);
-    return []; // Возвращаем пустой массив в случае ошибки
+    return []; 
   }
 };
-
+//выдает список id искомых пользователей
 export default searchInformation;

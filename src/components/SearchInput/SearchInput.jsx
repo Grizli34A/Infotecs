@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import SearchBy from "../SearchBy/SearchBy";
 import searchInformation from "../../services/searchInformation";
@@ -7,7 +6,7 @@ import searcIcon from "../../assets/searchIcon.svg";
 import "./SearchInput.scss";
 const SearchInput = ({ setSearchedUsers }) => {
   const [searchInputValue, setSearchInputValue] = useState("");
-  const [sortType, setSortType] = useState("firstName");
+  const [sortType, setSortType] = useState("firstName"); //по умолчанию ищем пользователей по имени
   const [isValid, setIsValid] = useState(true);
 
   const searchUsers = async () => {
@@ -20,7 +19,7 @@ const SearchInput = ({ setSearchedUsers }) => {
   const handleInputChange = (event) => {
     const value = event.target.value;
     setSearchInputValue(value);
-    if (value !== "") setIsValid(validateInput(sortType, value));
+    if (value !== "") setIsValid(validateInput(sortType, value)); //проверка на пустое, чтобы в случае стирания полностью не высвечивалась ошибка
   };
   return (
     <div className="searchInputContainer">

@@ -10,8 +10,8 @@ const getAllUsers = async () => {
     return data.users || [];
   } catch (error) {
     console.error("Error fetching all users:", error);
-    return []; // Возвращаем пустой массив в случае ошибки
+    return [];
   }
 };
-
+// список всех пользователей
 export default getAllUsers;
