@@ -1,12 +1,15 @@
 .userInfoModal {
+  font-size: 1.1rem;
   position: absolute;
   padding: 10px;
   top: 30%;
   left: 35%;
   background-color: rgb(220, 242, 26);
   border-radius: 10px;
-  width: 25vw;
-  height: 20vh;
+  min-width: 25vw;
+  min-height: 20vh;
+  height: fit-content;
+  width: fit-content;
   &__header {
     img {
       cursor: pointer;
